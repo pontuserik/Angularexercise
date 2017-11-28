@@ -1,43 +1,31 @@
-let movieData = require("./data");
-let $ = require("jquery");
-
 function renderMovie(data){
-  ui.title.text(data.title);
-  ui.review.text(data.review);
-  ui.poster.attr("src", data.imgUrl);
-
-  ui.actors.empty();
-  for(let i=0; i<data.actors.length; i++){
-    ui.actors.append("<li>" + data.actors[i] + "</li>");
+    document.querySelector(".infosection h1").textContent = data.title;
+    document.querySelector(".infosection p").textContent = data.review;
+    document.querySelector(".poster").setAttribute("src", data.imgUrl);
+  
+    let actorList = "";
+    for(let i=0; i<data.actors.length; i++){
+      actorList += "<li>" + data.actors[i] + "</li>";
+    }
+    document.querySelector(".infosection ul").innerHTML = actorList;
   }
-}
-
-function changeStarRating(rating){
-  $(".filled").removeClass("filled");
-  for(let i=1; i<=rating; i++){
-    ui.stars[i-1].addClass("filled");
+  
+  function changeStarRating(rating){
+    for(let i=1; i<=5; i++){
+      let star = document.getElementById("star" + i);
+      if (i <= rating){
+        star.classList.add("filled");
+      } else {
+        star.classList.remove("filled");
+      }
+    }
   }
-}
-
-let ui = {
-  title: $(".infosection h1"),
-  review: $(".infosection p"),
-  poster: $(".poster"),
-  actors: $(".infosection ul"),
-  rating: $(".stars"),
-  stars: [
-    $("[data-rating-id='1']"),
-    $("[data-rating-id='2']"),
-    $("[data-rating-id='3']"),
-    $("[data-rating-id='4']"),
-    $("[data-rating-id='5']")
-  ]
-};
-
-ui.rating.on("click", "span", function(e){
-  let star = $(e.target);
-  let rating = parseInt(star.attr("data-rating-id"));
-  changeStarRating(rating);
-});
-
-renderMovie(movieData);
+  
+  for(let i=1; i<=5; i++){
+    let star = document.getElementById("star" + i);
+    star.addEventListener("click", function(){
+      changeStarRating(i);
+    });
+  }
+  
+  renderMovie(movieData);
