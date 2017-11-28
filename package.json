@@ -1,0 +1,26 @@
+{
+  "name": "moviereview_4_8",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "bundle": "webpack",
+    "less": "lessc ./styles.less distribution/styles.css",
+    "copyindex": "cp index.html distribution/index.html",
+    "build": "npm run lintjs && npm run lintless && npm run bundle && npm run less && npm run copyindex",
+    "lintless": "stylelint styles.less",
+    "lintjs": "eslint ."
+  },
+  "author": "Tuffvid",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "less": "^2.7.3",
+    "stylelint": "^8.3.1",
+    "webpack": "^3.8.1"
+  }
+}

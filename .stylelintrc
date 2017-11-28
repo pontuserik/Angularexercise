@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "max-empty-lines": 4,
+    "string-quotes": "single",
+    "color-hex-length": "long",
+  }
+}
